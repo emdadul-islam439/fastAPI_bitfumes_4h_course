@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, status
+from fastapi import FastAPI, Depends, status, HTTPException
 from .database import engine, SessionLocal
 from . import schemas, models
 from sqlalchemy.orm import Session
@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 app = FastAPI()
 models.Base.metadata.create_all(engine)
 
-def get_db():
+def get_db():   
     db = SessionLocal()
     try:
         yield db
@@ -27,10 +27,20 @@ def create(request: schemas.Blog, db: Session = Depends(get_db)):
 @app.get("/blog", status_code=status.HTTP_200_OK)
 def all(db: Session = Depends(get_db)):
     blogs = db.query(models.Blog).all()
-    return blogs
+    if len(blogs) == 0:
+        raise HTTPException(status_code=status.HTTP_204_NO_CONTENT, detail="Blog list is empty!")
+    else:
+        return blogs
+
 
 @app.get("/blog/{id}", status_code=status.HTTP_200_OK)
 def show(id: int, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
-    return blog
+
+    if not blog:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"Blog no. {id} not found!")
+        # response.status_code = status.HTTP_404_NOT_FOUND #from fastapi import Response
+        # return { "detail" : f"Blog no. {id} not found!" }
+    else:
+        return blog
 

@@ -56,3 +56,21 @@
             -db.commit()
             -db.refresh(..)
     * finally run the code. That's it!
+
+## add Get API:
+    -> use db.query(..) method
+    -> sometimes have to use db.query(....).filter(...) method
+    -> use type into the query(...) method
+        - query(models.Blog)
+    -> use type and properties into the filter(...) method
+        - filter(models.Blog.id == ....)
+
+## Use status_code and HTTPException to return custom details-codes
+    -> from fastapi import status, Response, HTTPException
+    -> @app.get("/blog", status_code=status.HTTP_200_OK)
+    -> if not blog:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"Blog no. {id} not found!")
+        #Or, 
+        # response.status_code = status.HTTP_404_NOT_FOUND #from fastapi import Response
+        # return { "detail" : f"Blog no. {id} not found!" }
+    
