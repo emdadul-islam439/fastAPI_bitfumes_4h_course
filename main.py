@@ -20,6 +20,6 @@ def comments(id: int):
     }
 
 
-@app.get("/blog/unplublished")
+@app.get("/blog/unpublished")
 def unpublished():
     return { "Data" : "Some unpublished blogs" }
