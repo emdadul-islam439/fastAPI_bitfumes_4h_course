@@ -49,5 +49,6 @@ def create_blog(blog: Blog):
 # import uvicorn
 # type 'python3 main.py' to run
 # can output as the other methods
-if __name__ == "__main__":
-    uvicorn.run(app, host = "127.0.0.1", port = 9000)
+
+# if __name__ == "__main__":
+#     uvicorn.run(app, host = "127.0.0.1", port = 9000)

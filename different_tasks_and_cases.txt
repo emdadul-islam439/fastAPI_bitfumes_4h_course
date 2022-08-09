@@ -1,0 +1,35 @@
+## FastApi read file line by line. So, position the functions 'carefully'
+    * place "@app.get('/blog/unpublished')" before "@app.get('/blog/{id}')"
+        -> if the 'id' variable is 'int', then 'unpublished' will be 'un-acceptable' becasue of being 'string'
+
+## By the use of 'Optional', we can reduce the number of functions to call 
+    * used optional query-parameter into the index(...) functions  
+        -> because of this, we have able to remove two redundant function call
+
+
+## for debugging purposes, you can run the file in different port
+    * import uvicorn
+    * type 'python3 main.py' to run
+    * can output as the other methods
+    -> if __name__ == "__main__":
+            uvicorn.run(app, host = "127.0.0.1", port = 9000)
+
+## you can install all the dependancies from a text file:
+    -> requirements.txt file contains all the dependancies' names
+        -uvicorn
+        -fastapi
+    -> in the terminal, write "pip install -r requirements.txt", that's it!! installation will be started
+
+
+
+
+-------------------- Starting DB integration --------------------------
+
+## create a folder named -> "blog" and add->
+    -> "__init__.py" empty file
+    -> "main.py" file. we well write code in it 
+    -> create a file "requirements.txt" and write all the dependancy names
+    -> create virtual environment (if not running it already)
+    -> install all the dependancies from requirements.txt file from command line
+        - "pip install -r requirements.txt"
+
