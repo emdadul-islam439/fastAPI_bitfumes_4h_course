@@ -1,3 +1,8 @@
 ## FastApi read file line by line. So, position the functions 'carefully'
     * place "@app.get('/blog/unpublished')" before "@app.get('/blog/{id}')"
         -> if the 'id' variable is 'int', then 'unpublished' will be 'un-acceptable' becasue of being 'string'
+
+## By the use of 'Optional', we can reduce the number of functions to call 
+    * used optional query-parameter into the index(...) functions  
+        -> because of this, we have able to remove two redundant function call
+

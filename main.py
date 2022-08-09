@@ -1,29 +1,12 @@
+import imp
 from fastapi import FastAPI
+from typing import Optional
 
 app = FastAPI()
 
 
-# limit and published is optional
 @app.get("/blog")
-def index(limit: int = 5, published: bool = True):
-    if published:
-        return { "Data" : f"Showing {limit} published blogs." }
-    else:
-        return { "Data" : f"Showing {limit} blogs." }
-
-
-# limit is required, published is optional
-@app.get("/blog")
-def index(limit: int, published: bool = True):
-    if published:
-        return { "Data" : f"Showing {limit} published blogs." }
-    else:
-        return { "Data" : f"Showing {limit} blogs." }
-
-
-# limit and published both are required
-@app.get("/blog")
-def index(limit: int, published: bool):
+def index(limit: Optional[int] = 5, published: Optional[bool] = True):
     if published:
         return { "Data" : f"Showing {limit} published blogs." }
     else:
