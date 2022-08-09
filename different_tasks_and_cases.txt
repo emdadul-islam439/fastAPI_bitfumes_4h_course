@@ -37,3 +37,22 @@
     -> write a simple 'post' api 
         - imported 'fastapi' and 'pydantic' 
         - wrote a 'create(request: Blog)' function
+
+## Storing first ROW into the DB:
+    * Create schemas.py file
+        -> transfer the Blog class to this file
+    * Create database.py file
+        -> follow these links' steps:
+            - https://fastapi.tiangolo.com/tutorial/sql-databases/
+            - https://docs.sqlalchemy.org/en/13/orm/tutorial.html [engine, session, etc.]
+    * Create models.py file
+        -> add a base (data) class named Blog
+        -> define id, title, body variables related to blogs info
+    * Write "Creating DB" related codes
+        -> models.....create_all()
+        -> add new data into the DB
+        -> call db related different functions
+            -db.add(...)
+            -db.commit()
+            -db.refresh(..)
+    * finally run the code. That's it!
