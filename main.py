@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
+import uvicorn
 
 app = FastAPI()
 
@@ -41,3 +42,12 @@ class Blog(BaseModel):
 def create_blog(blog: Blog):
     return { "data" : blog }
 
+
+
+
+# for debugging purposes, you can run the file in different port
+# import uvicorn
+# type 'python3 main.py' to run
+# can output as the other methods
+if __name__ == "__main__":
+    uvicorn.run(app, host = "127.0.0.1", port = 9000)
