@@ -7,6 +7,11 @@ def index():
     return { "Data" : "Index Page" }
 
 
+@app.get("/blog/unpublished")
+def unpublished():
+    return { "Data" : "Some unpublished blogs" }
+
+
 @app.get("/blog/{id}")
 def show(id: int):
     return { "Data" : f"Blog no. {id}" }    
@@ -18,8 +23,3 @@ def comments(id: int):
         "ID" : id,
         "Comments" : ["Comment 1", "Comment 2"] 
     }
-
-
-@app.get("/blog/unpublished")
-def unpublished():
-    return { "Data" : "Some unpublished blogs" }
