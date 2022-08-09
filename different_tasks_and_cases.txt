@@ -33,3 +33,7 @@
     -> install all the dependancies from requirements.txt file from command line
         - "pip install -r requirements.txt"
 
+## Start Writing into the 'blog/main.py' file
+    -> write a simple 'post' api 
+        - imported 'fastapi' and 'pydantic' 
+        - wrote a 'create(request: Blog)' function
