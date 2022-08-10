@@ -73,4 +73,13 @@
         #Or, 
         # response.status_code = status.HTTP_404_NOT_FOUND #from fastapi import Response
         # return { "detail" : f"Blog no. {id} not found!" }
-    
+
+## Delete and Update (delet and put):
+    -> for delete()
+        - use "HTTP_204_NO_CONTENT" as default request_code
+        - use ".delete(synchronize_session=False)" after "db.query(models.Blog).filter(models.Blog.id == id)"
+    -> for put()
+        - use "HTTP_202_ACCEPTED" as default request_code
+        - use ".blog.update(updated_request.dict())" after "db.query(models.Blog).filter(models.Blog.id == id)"
+        - don't use any comma after the last value of the json file
+            -> use {"body": "1st updated body"} instead of {"body": "1st updated body",}
