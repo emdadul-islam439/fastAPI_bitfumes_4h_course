@@ -175,3 +175,10 @@
                     prefix="/user"
                 )
             - you won't need to use 'tags' and 'prefix' in every functions
+
+
+## Create Repository:
+    -> create a 'repository' folder inside 'blog'
+    -> inside it, create 'blog.py' and 'user.py' files
+    -> move 'routers' folder's all the implementations of 'blog.py' & 'user.py' into the respective function of repository's 'blog.py' & 'user.py'
+    -> That's  it!
