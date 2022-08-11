@@ -17,16 +17,16 @@ def get_db():
         db.close()
 
 
-@app.post("/blog", status_code=status.HTTP_201_CREATED, tags=["Blogs", "Testing.."])
+@app.post("/blog", status_code=status.HTTP_201_CREATED, tags=["Blogs"])
 def create(request: schemas.Blog, db: Session = Depends(get_db)):
-    new_blog = models.Blog(title = request.title, body = request.body)
+    new_blog = models.Blog(title = request.title, body = request.body, user_id = 1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
     return new_blog
 
 
-@app.delete("/blog/{id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Blogs", "Testing.."])
+@app.delete("/blog/{id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Blogs"])
 def destroy(id: int, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
     

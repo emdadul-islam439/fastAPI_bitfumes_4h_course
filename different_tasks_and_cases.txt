@@ -142,3 +142,12 @@
         - That's it!
     -> You can use more than one tags into an API. 
         - One API can be shown into different section by this technique.
+
+## Make "Relationships":
+    -> in the 'models.py' file add relationships to the related classes:
+        * import-> "from sqlalchemy.orm import relationships"
+        * in the 'Blog' class add -> creator = relationship("User", back_populates="blogs")
+        * in the 'User' class add -> blogs = relationship("Blog", back_populates="creator")
+    -> in the 'schemas.py' file add fields to related classes:
+        * in the 'ShowBlog' class add -> creator: UserInfo
+        * in the 'ShowUser' class add -> blogs: List[Blog] = []

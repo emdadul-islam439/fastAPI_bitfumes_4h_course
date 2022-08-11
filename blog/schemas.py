@@ -1,18 +1,11 @@
 # from typing import Optional
-from lib2to3.pytree import Base
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
 
 class Blog(BaseModel):
     title: str
     body: str
-
-
-class ShowBlog(BaseModel):
-    title: str
-    body: str
-    
-    class Config():
+    class Config:
         orm_mode = True
 
 
@@ -26,9 +19,20 @@ class User(BaseModel):
     email: str
     password: str
 
-class ShowUser(BaseModel):
+class UserInfo(BaseModel):
     name: str
     email: str
-
     class Config:
+        orm_mode = True
+
+class ShowUser(UserInfo):
+    blogs: List[Blog] = []
+
+
+class ShowBlog(BaseModel):
+    title: str
+    body: str
+    creator: UserInfo
+    
+    class Config():
         orm_mode = True
