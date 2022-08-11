@@ -1,10 +1,9 @@
 from distutils.util import execute
 from fastapi import FastAPI, Depends, status, HTTPException
 from .database import engine, SessionLocal
-from . import schemas, models
+from . import schemas, models, hashing
 from sqlalchemy.orm import Session
 from typing import List
-from passlib.context import CryptContext
 
 
 app = FastAPI()
@@ -85,11 +84,9 @@ def show(id: int, db: Session = Depends(get_db)):
         return blog
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 @app.post("/user", status_code=status.HTTP_201_CREATED)
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    new_user = models.User(name = request.name, email = request.email, password = pwd_context.hash(request.password))
+    new_user = models.User(name = request.name, email = request.email, password = hashing.get_password_hash(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
