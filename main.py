@@ -1,54 +1,15 @@
-from fastapi import FastAPI
-from typing import Optional
-from pydantic import BaseModel
-import uvicorn
+from distutils.util import execute
+from fastapi import FastAPI, Depends, status, HTTPException
+from .database import engine, get_db
+from . import schemas, models
+from sqlalchemy.orm import Session
+from typing import List
+from .hashing import Hash
+from .routers import blog, user, authentication
 
 app = FastAPI()
+models.Base.metadata.create_all(engine)
 
-
-@app.get("/blog")
-def index(limit: Optional[int] = 5, published: Optional[bool] = True):
-    if published:
-        return { "Data" : f"Showing {limit} published blogs." }
-    else:
-        return { "Data" : f"Showing {limit} blogs." }
-
-
-@app.get("/blog/unpublished")
-def unpublished():
-    return { "Data" : "Some unpublished blogs" }
-
-
-@app.get("/blog/{id}")
-def show(id: int):
-    return { "Data" : f"Blog no. {id}" }    
-
-
-@app.get("/blog/{id}/comments")
-def comments(id: int):
-    return { 
-        "ID" : id,
-        "Comments" : ["Comment 1", "Comment 2"] 
-    }
-
-
-class Blog(BaseModel):
-    title: str
-    body: str
-    published: Optional[bool] = True
-
-
-@app.post("/blog")
-def create_blog(blog: Blog):
-    return { "data" : blog }
-
-
-
-
-# for debugging purposes, you can run the file in different port
-# import uvicorn
-# type 'python3 main.py' to run
-# can output as the other methods
-
-# if __name__ == "__main__":
-#     uvicorn.run(app, host = "127.0.0.1", port = 9000)
+app.include_router(authentication.router)
+app.include_router(blog.router)
+app.include_router(user.router)
