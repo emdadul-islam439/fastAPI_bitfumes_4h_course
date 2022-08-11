@@ -134,8 +134,11 @@
     -> call 'pwd_context.hash(...)' to hash the password: 
         -hashed_password = pwd_context.hash(request.password)
 
+
 ## Using 'tags':
     -> for dividing different API into different sections, use 'tags'
         - inside the "@app.get/put/delete/post(...)", use "tags=[...]"
             * Example: "@app.get('/blogs', status_code=---, tags=['Blogs'])
         - That's it!
+    -> You can use more than one tags into an API. 
+        - One API can be shown into different section by this technique.
