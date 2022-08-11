@@ -125,4 +125,11 @@
                     orm_mode = True
     -> created GET API using "app.get(...)" with end-point, status_code and "response_model = schemas.ShowUser"
 
-        
+
+## Hash password:
+    -> install 'passlib[bcrypt]' library with the requirements.txt file
+    -> import "from passlib.context import CryptContext"
+    -> create a variable: 
+        -pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    -> call 'pwd_context.hash(...)' to hash the password: 
+        -hashed_password = pwd_context.hash(request.password)
