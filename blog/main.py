@@ -61,6 +61,7 @@ def update(id: int, request: schemas.UpdatedBlog, db: Session = Depends(get_db))
     return  "Updated!"
 
 
+
 @app.get("/blog", status_code=status.HTTP_200_OK)
 def all(db: Session = Depends(get_db)):
     blogs = db.query(models.Blog).all()
@@ -70,7 +71,7 @@ def all(db: Session = Depends(get_db)):
         return blogs
 
 
-@app.get("/blog/{id}", status_code=status.HTTP_200_OK)
+@app.get("/blog/{id}", status_code=status.HTTP_200_OK, response_model=schemas.ShowBlog)
 def show(id: int, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
 

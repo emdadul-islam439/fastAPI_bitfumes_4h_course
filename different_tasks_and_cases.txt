@@ -2,6 +2,7 @@
     * place "@app.get('/blog/unpublished')" before "@app.get('/blog/{id}')"
         -> if the 'id' variable is 'int', then 'unpublished' will be 'un-acceptable' becasue of being 'string'
 
+
 ## By the use of 'Optional', we can reduce the number of functions to call 
     * used optional query-parameter into the index(...) functions  
         -> because of this, we have able to remove two redundant function call
@@ -13,6 +14,7 @@
     * can output as the other methods
     -> if __name__ == "__main__":
             uvicorn.run(app, host = "127.0.0.1", port = 9000)
+
 
 ## you can install all the dependancies from a text file:
     -> requirements.txt file contains all the dependancies' names
@@ -33,10 +35,12 @@
     -> install all the dependancies from requirements.txt file from command line
         - "pip install -r requirements.txt"
 
+
 ## Start Writing into the 'blog/main.py' file
     -> write a simple 'post' api 
         - imported 'fastapi' and 'pydantic' 
         - wrote a 'create(request: Blog)' function
+
 
 ## Storing first ROW into the DB:
     * Create schemas.py file
@@ -57,6 +61,7 @@
             -db.refresh(..)
     * finally run the code. That's it!
 
+
 ## add Get API:
     -> use db.query(..) method
     -> sometimes have to use db.query(....).filter(...) method
@@ -64,6 +69,7 @@
         - query(models.Blog)
     -> use type and properties into the filter(...) method
         - filter(models.Blog.id == ....)
+
 
 ## Use status_code and HTTPException to return custom details-codes
     -> from fastapi import status, Response, HTTPException
@@ -74,7 +80,8 @@
         # response.status_code = status.HTTP_404_NOT_FOUND #from fastapi import Response
         # return { "detail" : f"Blog no. {id} not found!" }
 
-## Delete and Update (delet and put):
+
+## Delete and Update (delete and put):
     -> for delete()
         - use "HTTP_204_NO_CONTENT" as default request_code
         - use ".delete(synchronize_session=False)" after "db.query(models.Blog).filter(models.Blog.id == id)"
@@ -83,3 +90,17 @@
         - use ".blog.update(updated_request.dict())" after "db.query(models.Blog).filter(models.Blog.id == id)"
         - don't use any comma after the last value of the json file
             -> use {"body": "1st updated body"} instead of {"body": "1st updated body",}
+
+
+## Creating Response Model 
+    -> suppose, you're returning 'blog details'. In the normal way, you will return 'title', 'id' and 'body'
+    -> But, if you just want to show 'title' and 'body', and try to HIDE the 'id', then use a RESPONSE Model
+    -> HOW CAN MAKE/USE:
+        - in the schemas.py create class: class ShowBlog()
+        - inside ShowBlog() class, create another class name 'Config', and make orm_mode=True
+            : class Config():
+                orm_mode = True
+        - create the variables related to showing the details: title: str, body: str
+            : if you don't use any variable, empty dict() will be returned
+        - inside "@app.get(...)", use response_model =schemas.ShowBlog
+            
