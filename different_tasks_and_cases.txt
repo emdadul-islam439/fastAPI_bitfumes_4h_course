@@ -187,4 +187,6 @@
     -> Create a new 'route' called 'authentication'
     -> Create a POST API to login, take UserName and Password 
     -> varify the user-given password with 'hashed' password, and return 
-    
+    -> install 'python-jose' library, copy-paste some codes from the Doc [create_access_toke(..):..., etc.]
+    -> generate the token and return it!
+
