@@ -23,6 +23,10 @@
     -> in the terminal, write "pip install -r requirements.txt", that's it!! installation will be started
 
 
+## you can check the lates DB info:
+    -> install "Table Plus" from their website
+    -> select "SQLite" databaste, Give a name, select the .db file from computer
+    -> press "Connect", That's it!
 
 
 -------------------- Starting DB integration --------------------------
@@ -106,4 +110,19 @@
         - if you want to return a list, use "List[...]"
             : from typing import List
             : response_model = List[schemas.ShowBlog]
-            
+
+
+## Create User:
+    -> Created User Table
+        - in schemas.py file, created a class named "User"
+        - in models.py file, created a class named "User" and given: "__tablename__ = 'users'"
+    -> created PUT API using "@app.put(...)" with "/user" end-point and "status_code=status.HTTP_201_CREATED"
+
+## Show User:
+    -> Created "response_model"
+        - in schemas.py file, created a class named "ShowUser" with:
+            ** Class Config: 
+                    orm_mode = True
+    -> created GET API using "app.get(...)" with end-point, status_code and "response_model = schemas.ShowUser"
+
+        
