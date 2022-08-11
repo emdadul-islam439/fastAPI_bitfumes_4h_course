@@ -86,7 +86,7 @@ def show(id: int, db: Session = Depends(get_db)):
 
 @app.post("/user", status_code=status.HTTP_201_CREATED)
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    new_user = models.User(name = request.name, email = request.email, password = hashing.get_password_hash(request.password))
+    new_user = models.User(name = request.name, email = request.email, password = hashing.Hash.get_password_hash(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
