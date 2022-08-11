@@ -182,3 +182,9 @@
     -> inside it, create 'blog.py' and 'user.py' files
     -> move 'routers' folder's all the implementations of 'blog.py' & 'user.py' into the respective function of repository's 'blog.py' & 'user.py'
     -> That's  it!
+
+## Authenticating:
+    -> Create a new 'route' called 'authentication'
+    -> Create a POST API to login, take UserName and Password 
+    -> varify the user-given password with 'hashed' password, and return 
+    
