@@ -167,3 +167,11 @@
               from .. import models, schemas, database
               ...
         * Do the same to into 'user.py' file. That's it1
+    
+    -> OTHER INFO:
+        * lot of redundant code can be vanished->
+            - router = APIRouter(
+                    tags=["Users"],
+                    prefix="/user"
+                )
+            - you won't need to use 'tags' and 'prefix' in every functions
