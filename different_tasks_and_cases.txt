@@ -195,4 +195,7 @@
         * oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
         * from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
           from jose import JWTError, jwt
+    -> add 'login_required' tag by adding this:
+        * "current_user: User = Depends(get_current_active_user)"
+        * Example: "def all(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):"
 
