@@ -103,4 +103,7 @@
         - create the variables related to showing the details: title: str, body: str
             : if you don't use any variable, empty dict() will be returned
         - inside "@app.get(...)", use response_model =schemas.ShowBlog
+        - if you want to return a list, use "List[...]"
+            : from typing import List
+            : response_model = List[schemas.ShowBlog]
             
