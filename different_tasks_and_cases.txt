@@ -133,3 +133,9 @@
         -pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     -> call 'pwd_context.hash(...)' to hash the password: 
         -hashed_password = pwd_context.hash(request.password)
+
+## Using 'tags':
+    -> for dividing different API into different sections, use 'tags'
+        - inside the "@app.get/put/delete/post(...)", use "tags=[...]"
+            * Example: "@app.get('/blogs', status_code=---, tags=['Blogs'])
+        - That's it!
