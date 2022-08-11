@@ -1,10 +1,10 @@
 from distutils.util import execute
 from fastapi import FastAPI, Depends, status, HTTPException
 from .database import engine, SessionLocal
-from . import schemas, models, hashing
+from . import schemas, models
 from sqlalchemy.orm import Session
 from typing import List
-
+from .hashing import Hash
 
 app = FastAPI()
 models.Base.metadata.create_all(engine)
@@ -86,7 +86,7 @@ def show(id: int, db: Session = Depends(get_db)):
 
 @app.post("/user", status_code=status.HTTP_201_CREATED)
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    new_user = models.User(name = request.name, email = request.email, password = hashing.Hash.get_password_hash(request.password))
+    new_user = models.User(name = request.name, email = request.email, password = Hash.get_password_hash(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
