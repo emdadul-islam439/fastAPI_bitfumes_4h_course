@@ -143,6 +143,7 @@
     -> You can use more than one tags into an API. 
         - One API can be shown into different section by this technique.
 
+
 ## Make "Relationships":
     -> in the 'models.py' file add relationships to the related classes:
         * import-> "from sqlalchemy.orm import relationships"
@@ -151,3 +152,18 @@
     -> in the 'schemas.py' file add fields to related classes:
         * in the 'ShowBlog' class add -> creator: UserInfo
         * in the 'ShowUser' class add -> blogs: List[Blog] = []
+
+
+## Creating Routers:
+    -> create a folder named 'routers' and inside this-> create '__init__.py' empty file
+    -> then create two files for our project's need-> 'blog.py' and 'user.py'
+    -> start with 'blog.py' file [procedures are same for two files]
+        * "from fastapi import APIRouters"
+        * "routers = APIRouters()"
+        * after this two lines, copy paste all the 'blog' related functions, change '@app' into '@router'
+            - "@app.get(...)" will be '@router.get(...)' 
+        * import all the dependancies to this files
+            - from fastapi import APIRouters, status, Depends, HTTPExtceptions etc.
+              from .. import models, schemas, database
+              ...
+        * Do the same to into 'user.py' file. That's it1
