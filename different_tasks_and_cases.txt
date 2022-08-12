@@ -1,3 +1,6 @@
+## if you use 'gunicorn' into your PROC-File, then:
+    -> remember adding 'gunicorn' into the 'requirements.py' file also
+
 ## FastApi read file line by line. So, position the functions 'carefully'
     * place "@app.get('/blog/unpublished')" before "@app.get('/blog/{id}')"
         -> if the 'id' variable is 'int', then 'unpublished' will be 'un-acceptable' becasue of being 'string'
